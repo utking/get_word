@@ -1,0 +1,11 @@
+{
+  "name": "get_word",
+  "version": "1.0.1",
+  "description": "Oxford Dictionary Console Client",
+  "main": "index.js",
+  "author": "UtkinG <utking@mail.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
