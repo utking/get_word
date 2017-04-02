@@ -12,6 +12,15 @@ Script working with Oxford Dictionaries API and fetching meanings/synonyms for w
 $ npm install
 ```
 
+Create a `config.js` exporting an object of the following structure:
+
+```
+module.exports = {
+  api_id: 'insert your id',
+  api_key: 'insert your key'
+};
+```
+
 ## Usage examples
 
 ```
