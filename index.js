@@ -75,6 +75,7 @@ let req = https.get(requestHeaders, (res) => {
 
 function showMeaning(resp) {
   console.info('Meanings list:');
+  let index = 0;
   resp
     .map(i => i.entries.pop())
     .filter(i => i.senses)
@@ -84,7 +85,14 @@ function showMeaning(resp) {
       return prev;
     }, [])
     .map(i => i.definitions.join('; '))
-    .forEach((i,index) => console.log(`  ${index+1}: ${i}`))
+    .sort()
+    .reduce((prev, cur)=> {
+      if (!prev)
+        prev = new Set();
+      prev.add(cur);
+      return prev;
+    }, null)
+    .forEach((i) => console.log(`  ${++index}: ${i}`))
   ;
 }
 
