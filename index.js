@@ -90,6 +90,7 @@ function showMeaning(resp) {
 
 function showSynonyms(resp) {
   console.info('Synonyms list:');
+  let index = 0;
   resp
     .map(i => i.entries.pop())
     .filter(i => i.senses)
@@ -103,7 +104,13 @@ function showSynonyms(resp) {
       prev.push(items);
       return prev;
     }, [])
-    .join(';').split(';')
-    .forEach((i,index) => console.log(`  ${index+1}: ${i}`))
+    .join(';').split(';').sort()
+    .reduce((prev, cur)=> {
+      if (!prev)
+        prev = new Set();
+      prev.add(cur);
+      return prev;
+    }, null)
+    .forEach((i) => console.log(`  ${++index}: ${i}`))
   ;
 }
