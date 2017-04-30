@@ -4,9 +4,10 @@ const modes = require('./config/modes');
 const options = require('./config/config');
 
 program
-  .version('1.0.2')
+  .version('1.0.3')
   .usage('<word|phrase> [options]')
   .option('-s, --synonyms', 'Show synonyms for the word')
+  .option('-a, --antonyms', 'Show antonyms for the word')
   .option('-e, --examples', 'Show usage examples')
   .parse(process.argv);
 
@@ -48,7 +49,8 @@ let req = https.get(requestHeaders, (res) => {
       let items = resp.results.pop().lexicalEntries;
       switch (mode) {
         case modes.SYNONYMS:
-          showSynonyms(items);
+        case modes.ANTONYM:
+          showSynonyms(items, mode);
           break;
         case modes.USAGE:
           showUsage(items);
@@ -101,15 +103,19 @@ function showMeaning(resp) {
   ;
 }
 
-function showSynonyms(resp) {
-  console.info('Synonyms list:');
+function showSynonyms(resp, mode) {
+  console.info(`${appendix} list:`);
   let index = 0;
   resp
     .map(i => i.entries.pop())
     .filter(i => i.senses)
     .map(i => i.senses)
     .reduce((prev, cur) => {
-      cur.forEach(i => { prev.push(i.synonyms); });
+      if (mode == modes.SYNONYMS) {
+        cur.forEach(i => { prev.push(i.synonyms); });
+      } else {
+        cur.forEach(i => { prev.push(i.antonyms); });
+      }
       return prev;
     }, [])
     .reduce((prev, cur) => {
@@ -132,6 +138,8 @@ function getMode(program) {
   let mode = modes.GENERAL;
   if (program.synonyms) {
     mode = modes.SYNONYMS;
+  } else if (program.antonyms) {
+    mode = modes.ANTONYM;
   } else if (program.examples) {
     mode = modes.USAGE;
   }
@@ -144,6 +152,9 @@ function getAppendix(mode) {
   switch (mode) {
     case modes.SYNONYMS:
       appendix = options.api_synonym_appendix;
+      break;
+    case modes.ANTONYM:
+      appendix = options.api_antonym_appendix;
       break;
     case modes.USAGE:
       appendix = options.api_usage_appendix;

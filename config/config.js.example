@@ -2,6 +2,7 @@ module.exports = {
   api_hosthane: 'od-api.oxforddictionaries.com',
   api_path: '/api/v1/entries/',
   api_synonym_appendix: 'synonyms',
+  api_antonym_appendix: 'antonyms',
   api_meaning_appendix: 'definitions',
   api_usage_appendix: 'sentences',
   api_port: 443,
