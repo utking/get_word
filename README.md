@@ -1,6 +1,6 @@
 # get_word
 
-Script working with Oxford Dictionaries API and fetching meanings/synonyms for words.
+Script working with Oxford Dictionaries API and fetching meanings, synonyms, antonyms, and usages for words and short phrases.
 
 ## Requirements
 
@@ -28,6 +28,9 @@ $ node index.js -s [word|phrase]
 
 // fetch a list of usage examples for a word/phrase
 $ node index.js -e [word|phrase]
+
+// fetch a list of antonyms for a word/phrase
+$ node index.js -a [word|phrase]
 
 ```
 
