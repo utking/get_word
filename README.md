@@ -12,14 +12,7 @@ Script working with Oxford Dictionaries API and fetching meanings/synonyms for w
 $ npm install
 ```
 
-Create a `config.js` exporting an object of the following structure:
-
-```
-module.exports = {
-  api_id: 'insert your id',
-  api_key: 'insert your key'
-};
-```
+Create a `config.js` based on config/config.js.example file:
 
 ## Usage examples
 
@@ -32,6 +25,9 @@ $ node index.js [word|phrase]
 
 // fetch a list of synonyms for a word/phrase
 $ node index.js -s [word|phrase]
+
+// fetch a list of usage examples for a word/phrase
+$ node index.js -e [word|phrase]
 
 ```
 
