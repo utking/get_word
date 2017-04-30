@@ -1,0 +1,12 @@
+module.exports = {
+  api_hosthane: 'od-api.oxforddictionaries.com',
+  api_path: '/api/v1/entries/',
+  api_synonym_appendix: 'synonyms',
+  api_meaning_appendix: 'definitions',
+  api_usage_appendix: 'sentences',
+  api_port: 443,
+  lang: 'en',
+  api_id: 'insert your id',
+  api_key: 'insert your key'
+};
+
