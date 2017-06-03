@@ -1,10 +1,11 @@
 const https = require('https');
 const program = require('commander');
-const modes = require('./config/modes');
+const Modes = require('./config/modes');
 const options = require('./config/config');
+const OxfordFactory = require('./classes/Factory.js');
 
 program
-  .version('1.0.3')
+  .version('1.1.0')
   .usage('<word|phrase> [options]')
   .option('-s, --synonyms', 'Show synonyms for the word')
   .option('-a, --antonyms', 'Show antonyms for the word')
@@ -42,106 +43,27 @@ let req = https.get(requestHeaders, (res) => {
       resp = JSON.parse(results);
     } catch (e) {}
 
-    if (!resp.results) {
+    if (!resp.results || !Array.isArray(resp.results)) {
       console.info(`Info:: ${appendix} for the word '${decodeURIComponent(word)}' was not found`);
 
     } else {
-      let items = resp.results.pop().lexicalEntries;
-      switch (mode) {
-        case modes.SYNONYMS:
-        case modes.ANTONYM:
-          showSynonyms(items, mode);
-          break;
-        case modes.USAGE:
-          showUsage(items);
-          break;
-        default:
-          showMeaning(items);
-      }
-
+      new OxfordFactory()
+        .create(mode, resp.results.pop().lexicalEntries)
+        .showResults();
     }
   });
 
-  res.on('error', (e) => {
-    console.error('Error:',e);
-  });
-}).on('error', (e) => {
-  console.error('Error:',e);
-});
-
-function showUsage(resp) {
-  console.info('Usage examples:');
-  let index = 0;
-  resp
-    .map(i => i.sentences)
-    .reduce((p, c) => { return p.concat(c)}, [])
-    .map(i => i.text)
-    .forEach((i) => console.log(`  ${++index}: ${i}`))
-  ;
-}
-
-function showMeaning(resp) {
-  console.info('Meanings list:');
-  let index = 0;
-  resp
-    .map(i => i.entries.pop())
-    .filter(i => i.senses)
-    .map(i => i.senses)
-    .reduce((prev, cur) => {
-      cur.forEach(i => { prev.push(i); });
-      return prev;
-    }, [])
-    .map(i => i.definitions.join('; '))
-    .sort()
-    .reduce((prev, cur)=> {
-      if (!prev)
-        prev = new Set();
-      prev.add(cur);
-      return prev;
-    }, null)
-    .forEach((i) => console.log(`  ${++index}: ${i}`))
-  ;
-}
-
-function showSynonyms(resp, mode) {
-  console.info(`${appendix} list:`);
-  let index = 0;
-  resp
-    .map(i => i.entries.pop())
-    .filter(i => i.senses)
-    .map(i => i.senses)
-    .reduce((prev, cur) => {
-      if (mode == modes.SYNONYMS) {
-        cur.forEach(i => { prev.push(i.synonyms); });
-      } else {
-        cur.forEach(i => { prev.push(i.antonyms); });
-      }
-      return prev;
-    }, [])
-    .reduce((prev, cur) => {
-      let items = cur.map(i => i.text).join(';');
-      prev.push(items);
-      return prev;
-    }, [])
-    .join(';').split(';').sort()
-    .reduce((prev, cur)=> {
-      if (!prev)
-        prev = new Set();
-      prev.add(cur);
-      return prev;
-    }, null)
-    .forEach((i) => console.log(`  ${++index}: ${i}`))
-  ;
-}
+  res.on('error', console.error);
+}).on('error', console.error);
 
 function getMode(program) {
-  let mode = modes.GENERAL;
+  let mode = Modes.GENERAL;
   if (program.synonyms) {
-    mode = modes.SYNONYMS;
+    mode = Modes.SYNONYMS;
   } else if (program.antonyms) {
-    mode = modes.ANTONYM;
+    mode = Modes.ANTONYM;
   } else if (program.examples) {
-    mode = modes.USAGE;
+    mode = Modes.USAGE;
   }
   return mode;
 }
@@ -150,13 +72,13 @@ function getAppendix(mode) {
   let appendix = options.api_meaning_appendix;
 
   switch (mode) {
-    case modes.SYNONYMS:
+    case Modes.SYNONYMS:
       appendix = options.api_synonym_appendix;
       break;
-    case modes.ANTONYM:
+    case Modes.ANTONYM:
       appendix = options.api_antonym_appendix;
       break;
-    case modes.USAGE:
+    case Modes.USAGE:
       appendix = options.api_usage_appendix;
       break;
     default:
