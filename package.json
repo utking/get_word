@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "UtkinG <utking@mail.ru>",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha tests/index.js"
+  },
   "dependencies": {
     "commander": "^2.9.0"
   },
