@@ -8,7 +8,7 @@ class Meaning extends Oxford {
   _process() {
     let index = 0;
     this._result = `Meanings list:\n`;
-    this._resp
+    (this._resp || [])
       .map(i => i.entries.pop())
       .filter(i => i.senses)
       .map(i => i.senses)
@@ -18,12 +18,10 @@ class Meaning extends Oxford {
       }, [])
       .map(i => i.definitions.join('; '))
       .sort()
-      .reduce((prev, cur)=> {
-        if (!prev)
-          prev = new Set();
+      .reduce((prev, cur) => {
         prev.add(cur);
         return prev;
-      }, null)
+      }, new Set())
       .forEach(i => this._result += `  ${++index}: ${i}\n`);
   }
 }

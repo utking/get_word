@@ -8,7 +8,7 @@ class Synonym extends Oxford {
   _process() {
     let index = 0;
     this._result = `Synonyms list:\n`;
-    this._resp
+    (this._resp || [])
       .map(i => i.entries.pop())
       .filter(i => i.senses)
       .map(i => i.senses)
@@ -22,12 +22,12 @@ class Synonym extends Oxford {
         return prev;
       }, [])
       .join(';').split(';').sort()
-      .reduce((prev, cur)=> {
-        if (!prev)
-          prev = new Set();
-        prev.add(cur);
+      .reduce((prev, cur) => {
+        if (cur) {
+          prev.add(cur);
+        }
         return prev;
-      }, null)
+      }, new Set())
       .forEach(i => this._result += `  ${++index}: ${i}\n`);
   }
 }

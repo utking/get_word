@@ -8,7 +8,7 @@ class Usage extends Oxford {
   _process() {
     let index = 0;
     this._result = 'Usage examples:\n';
-    this._resp
+    (this._resp || [])
       .map(i => i.sentences)
       .reduce((p, c) => { return p.concat(c)}, [])
       .map(i => i.text)
