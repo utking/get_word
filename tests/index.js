@@ -30,7 +30,7 @@ describe('Test the Factory class', () => {
     expect(f.create(Modes.ANTONYM)).to.be.an.instanceof(Antonym);
   });
   it(`should create an instance of the Synonym class`, () => {
-    expect(f.create(Modes.SYNONYMS)).to.be.an.instanceof(Synonym);
+    expect(f.create(Modes.SYNONYM)).to.be.an.instanceof(Synonym);
   });
   it(`should create an instance of the Usage class`, () => {
     expect(f.create(Modes.USAGE)).to.be.an.instanceof(Usage);

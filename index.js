@@ -59,7 +59,7 @@ let req = https.get(requestHeaders, (res) => {
 function getMode(program) {
   let mode = Modes.GENERAL;
   if (program.synonyms) {
-    mode = Modes.SYNONYMS;
+    mode = Modes.SYNONYM;
   } else if (program.antonyms) {
     mode = Modes.ANTONYM;
   } else if (program.examples) {
@@ -72,7 +72,7 @@ function getAppendix(mode) {
   let appendix = options.api_meaning_appendix;
 
   switch (mode) {
-    case Modes.SYNONYMS:
+    case Modes.SYNONYM:
       appendix = options.api_synonym_appendix;
       break;
     case Modes.ANTONYM:

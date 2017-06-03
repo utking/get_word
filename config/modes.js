@@ -1,6 +1,6 @@
 module.exports = {
   GENERAL: Symbol('General'),
-  SYNONYMS: Symbol('Synonym'),
+  SYNONYM: Symbol('Synonym'),
   ANTONYM: Symbol('Antonym'),
   USAGE: Symbol('Usage')
 };

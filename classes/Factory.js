@@ -7,7 +7,7 @@ const Usage   = require('./Usage');
 class OxfordFactory {
   create(mode, items) {
     switch (mode) {
-      case Modes.SYNONYMS:
+      case Modes.SYNONYM:
         return new Synonym(items);
       case Modes.ANTONYM:
         return new Antonym(items);
