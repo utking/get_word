@@ -18,10 +18,7 @@ class Meaning extends Oxford {
       }, [])
       .map(i => i.definitions.join('; '))
       .sort()
-      .reduce((prev, cur) => {
-        prev.add(cur);
-        return prev;
-      }, new Set())
+      .reduce((prev, cur) => prev.add(cur), new Set())
       .forEach(i => this._result += `  ${++index}: ${i}\n`);
   }
 }

@@ -10,7 +10,7 @@ class Usage extends Oxford {
     this._result = 'Usage examples:\n';
     (this._resp || [])
       .map(i => i.sentences)
-      .reduce((p, c) => { return p.concat(c)}, [])
+      .reduce((p, c) => p.concat(c), [])
       .map(i => i.text)
       .forEach(i => this._result += `  ${++index}: ${i}\n`);
   }
