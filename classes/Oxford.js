@@ -1,7 +1,6 @@
 class Oxford {
   constructor(resp) {
     this._resp = resp;
-    this._result = undefined;
   }
 
   _process() { }
