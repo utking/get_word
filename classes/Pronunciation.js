@@ -7,9 +7,9 @@ class Pronunciation extends Oxford {
 
   _process() {
     let index = 0;
-    this._result = `Pronunciations examples:\n`;
+    this._result = "Pronunciations examples:\n";
     (this._resp || [])
-      .map(i => {
+      .map((i) => {
         let item = i.pronunciations.pop();
         return {
           cat: i.lexicalCategory,
@@ -17,7 +17,7 @@ class Pronunciation extends Oxford {
           note: item.phoneticNotation,
         };
       })
-      .forEach(i => this._result += `  ${i.cat}: ${i.spell} (${i.note})\n`);
+      .forEach((i) => { this._result += `  ${i.cat}: ${i.spell} (${i.note})\n`; });
   }
 }
 

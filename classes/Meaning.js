@@ -7,19 +7,19 @@ class Meaning extends Oxford {
 
   _process() {
     let index = 0;
-    this._result = `Meanings list:\n`;
+    this._result = "Meanings list:\n";
     (this._resp || [])
-      .map(i => i.entries.pop())
-      .filter(i => i.senses)
-      .map(i => i.senses)
+      .map((i) => i.entries.pop())
+      .filter((i) => i.senses)
+      .map((i) => i.senses)
       .reduce((prev, cur) => {
-        cur.forEach(i => { prev.push(i); });
+        cur.forEach((i) => { prev.push(i); });
         return prev;
       }, [])
-      .map(i => i.definitions.join("; "))
+      .map((i) => i.definitions.join("; "))
       .sort()
       .reduce((prev, cur) => prev.add(cur), new Set())
-      .forEach(i => this._result += `  ${++index}: ${i}\n`);
+      .forEach((i) => { this._result += `  ${++index}: ${i}\n`; });
   }
 }
 

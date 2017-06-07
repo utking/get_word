@@ -21,28 +21,28 @@ describe("Test the Oxford class", () => {
 describe("Test the Factory class", () => {
   const f = new Factory();
   for (const m in Modes) {
-    it(`should create an Oxford descendant for ${m} mode`, () => {
+    it("should create an Oxford descendant for ${m} mode", () => {
       let o = f.create(m);
       should.exist(o);
     });
   }
 
-  it(`should create an instance of the Antonym class`, () => {
+  it("should create an instance of the Antonym class", () => {
     expect(f.create(Modes.ANTONYM)).to.be.an.instanceof(Antonym);
   });
-  it(`should create an instance of the Synonym class`, () => {
+  it("should create an instance of the Synonym class", () => {
     expect(f.create(Modes.SYNONYM)).to.be.an.instanceof(Synonym);
   });
-  it(`should create an instance of the Usage class`, () => {
+  it("should create an instance of the Usage class", () => {
     expect(f.create(Modes.USAGE)).to.be.an.instanceof(Usage);
   });
-  it(`should create an instance of the Meaning class`, () => {
+  it("should create an instance of the Meaning class", () => {
     expect(f.create(Modes.GENERAL)).to.be.an.instanceof(Meaning);
   });
-  it(`should create an instance of the Pronunciation class`, () => {
+  it("should create an instance of the Pronunciation class", () => {
     expect(f.create(Modes.PRONUNCIATION)).to.be.an.instanceof(Pronunciation);
   });
-  it(`should create an instance of the Meaning class by default`, () => {
+  it("should create an instance of the Meaning class by default", () => {
     expect(f.create()).to.be.an.instanceof(Meaning);
   });
 
