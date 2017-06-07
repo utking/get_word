@@ -1,4 +1,4 @@
-const Oxford = require('./Oxford');
+const Oxford = require("./Oxford");
 
 class Usage extends Oxford {
   constructor(resp) {
@@ -7,7 +7,7 @@ class Usage extends Oxford {
 
   _process() {
     let index = 0;
-    this._result = 'Usage examples:\n';
+    this._result = "Usage examples:\n";
     (this._resp || [])
       .map(i => i.sentences)
       .reduce((p, c) => p.concat(c), [])

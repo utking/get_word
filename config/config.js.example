@@ -1,13 +1,14 @@
 module.exports = {
-  api_hosthane: 'od-api.oxforddictionaries.com',
-  api_path: '/api/v1/entries/',
-  api_synonym_appendix: 'synonyms',
-  api_antonym_appendix: 'antonyms',
-  api_meaning_appendix: 'definitions',
-  api_usage_appendix: 'sentences',
+  api_hosthane: "od-api.oxforddictionaries.com",
+  api_path: "/api/v1/entries/",
+  api_synonym_appendix: "synonyms",
+  api_antonym_appendix: "antonyms",
+  api_meaning_appendix: "definitions",
+  api_usage_appendix: "sentences",
+  api_pronunciations_appendix: "pronunciations",
   api_port: 443,
-  lang: 'en',
-  api_id: 'insert your id',
-  api_key: 'insert your key'
+  lang: "en",
+  api_id: "insert your id",
+  api_key: "insert your key"
 };
 

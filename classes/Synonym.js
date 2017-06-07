@@ -1,4 +1,4 @@
-const Oxford = require('./Oxford');
+const Oxford = require("./Oxford");
 
 class Synonym extends Oxford {
   constructor(resp) {
@@ -17,11 +17,11 @@ class Synonym extends Oxford {
         return prev;
       }, [])
       .reduce((prev, cur) => {
-        let items = cur.map(i => i.text).join(';');
+        let items = cur.map(i => i.text).join(";");
         prev.push(items);
         return prev;
       }, [])
-      .join(';').split(';').sort()
+      .join(";").split(";").sort()
       .reduce((prev, cur) => {
         if (cur) {
           prev.add(cur);

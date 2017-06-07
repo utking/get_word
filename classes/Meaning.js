@@ -1,4 +1,4 @@
-const Oxford = require('./Oxford');
+const Oxford = require("./Oxford");
 
 class Meaning extends Oxford {
   constructor(resp) {
@@ -16,7 +16,7 @@ class Meaning extends Oxford {
         cur.forEach(i => { prev.push(i); });
         return prev;
       }, [])
-      .map(i => i.definitions.join('; '))
+      .map(i => i.definitions.join("; "))
       .sort()
       .reduce((prev, cur) => prev.add(cur), new Set())
       .forEach(i => this._result += `  ${++index}: ${i}\n`);

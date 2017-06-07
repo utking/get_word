@@ -1,8 +1,9 @@
-const Modes   = require('../config/modes.js');
-const Meaning = require('./Meaning');
-const Synonym = require('./Synonym');
-const Antonym = require('./Antonym');
-const Usage   = require('./Usage');
+const Modes         = require("../config/modes.js");
+const Meaning       = require("./Meaning");
+const Synonym       = require("./Synonym");
+const Antonym       = require("./Antonym");
+const Usage         = require("./Usage");
+const Pronunciation = require("./Pronunciation");
 
 class OxfordFactory {
   create(mode, items) {
@@ -13,6 +14,8 @@ class OxfordFactory {
         return new Antonym(items);
       case Modes.USAGE:
         return new Usage(items);
+      case Modes.PRONUNCIATION:
+        return new Pronunciation(items);
       case Modes.GENERAL:
       default:
         return new Meaning(items);
