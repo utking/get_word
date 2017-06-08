@@ -45,8 +45,8 @@ const requestHeaders = {
   path: `${options.api_path}${options.lang}/${word.toLowerCase()}/${appendix}`,
   port: options.api_port,
   headers: {
-    app_id: options.api_id,
-    app_key: options.api_key
+    "app_id" : options.api_id,
+    "app_key" : options.api_key
   }
 };
 
