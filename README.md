@@ -32,6 +32,9 @@ $ node index.js -e [word|phrase]
 // fetch a list of antonyms for a word/phrase
 $ node index.js -a [word|phrase]
 
+// fetch a list of pronunciations for a word
+$ node index.js -p [word]
+
 ```
 
 ## License
