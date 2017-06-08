@@ -4,7 +4,7 @@ const Modes = require("./config/modes");
 const options = require("./config/config");
 const OxfordFactory = require("./classes/Factory.js");
 
-const Console = require('console').Console;
+const Console = require("console").Console;
 const Logger = new Console(process.stdout, process.stderr);
 
 program
@@ -45,7 +45,9 @@ let req = https.get(requestHeaders, (res) => {
     let resp = {};
     try {
       resp = JSON.parse(results);
-    } catch (e) {}
+    } catch (e) {
+      Logger.error("Unexpected results. Cannot be parsed.");
+    }
 
     if (!resp.results || !Array.isArray(resp.results)) {
       Logger.info(`Info:: ${appendix} for the word "${decodeURIComponent(word)}" was not found`);

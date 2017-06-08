@@ -22,7 +22,7 @@ class Antonym extends Oxford {
         return prev;
       }, [])
       .join(";").split(";").sort()
-      .reduce((prev, cur)=> {
+      .reduce((prev, cur) => {
         if (cur) {
           prev.add(cur);
         }
