@@ -7,6 +7,20 @@ const OxfordFactory = require("./classes/Factory.js");
 const Console = require("console").Console;
 const Logger = new Console(process.stdout, process.stderr);
 
+function getMode(program) {
+  let mode = Modes.GENERAL;
+  if (program.synonyms) {
+    mode = Modes.SYNONYM;
+  } else if (program.antonyms) {
+    mode = Modes.ANTONYM;
+  } else if (program.examples) {
+    mode = Modes.USAGE;
+  } else if (program.pronunciations) {
+    mode = Modes.PRONUNCIATION;
+  }
+  return mode;
+}
+
 program
   .version("1.1.0")
   .usage("<word|phrase> [options]")
@@ -22,8 +36,9 @@ if (!program.args.length || program.args[0].length < 1) {
 }
 
 const mode = getMode(program);
+const factory = new OxfordFactory();
 const word = encodeURIComponent(program.args.join(" "));
-const appendix = getAppendix(mode);
+const appendix = factory.create(mode).getAppendix();
 
 const requestHeaders = {
   hostname: options.api_hosthane,
@@ -53,7 +68,7 @@ let req = https.get(requestHeaders, (res) => {
       Logger.info(`Info:: ${appendix} for the word "${decodeURIComponent(word)}" was not found`);
 
     } else {
-      new OxfordFactory()
+      factory
         .create(mode, resp.results.pop().lexicalEntries)
         .showResults();
     }
@@ -61,40 +76,4 @@ let req = https.get(requestHeaders, (res) => {
 
   res.on("error", Logger.error);
 }).on("error", Logger.error);
-
-function getMode(program) {
-  let mode = Modes.GENERAL;
-  if (program.synonyms) {
-    mode = Modes.SYNONYM;
-  } else if (program.antonyms) {
-    mode = Modes.ANTONYM;
-  } else if (program.examples) {
-    mode = Modes.USAGE;
-  } else if (program.pronunciations) {
-    mode = Modes.PRONUNCIATION;
-  }
-  return mode;
-}
-
-function getAppendix(mode) {
-  let appendix = options.api_meaning_appendix;
-
-  switch (mode) {
-    case Modes.SYNONYM:
-      appendix = options.api_synonym_appendix;
-      break;
-    case Modes.ANTONYM:
-      appendix = options.api_antonym_appendix;
-      break;
-    case Modes.USAGE:
-      appendix = options.api_usage_appendix;
-      break;
-    case Modes.PRONUNCIATION:
-      appendix = options.api_pronunciations_appendix;
-      break;
-    default:
-      appendix = options.api_meaning_appendix;
-  }
-  return appendix;
-}
 
