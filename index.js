@@ -4,6 +4,9 @@ const Modes = require("./config/modes");
 const options = require("./config/config");
 const OxfordFactory = require("./classes/Factory.js");
 
+const Console = require('console').Console;
+const Logger = new Console(process.stdout, process.stderr);
+
 program
   .version("1.1.0")
   .usage("<word|phrase> [options]")
@@ -14,7 +17,7 @@ program
   .parse(process.argv);
 
 if (!program.args.length || program.args[0].length < 1) {
-  console.error(new Error("Empty request"));
+  Logger.error(new Error("Empty request"));
   process.exit(0);
 }
 
@@ -45,7 +48,7 @@ let req = https.get(requestHeaders, (res) => {
     } catch (e) {}
 
     if (!resp.results || !Array.isArray(resp.results)) {
-      console.info(`Info:: ${appendix} for the word "${decodeURIComponent(word)}" was not found`);
+      Logger.info(`Info:: ${appendix} for the word "${decodeURIComponent(word)}" was not found`);
 
     } else {
       new OxfordFactory()
@@ -54,8 +57,8 @@ let req = https.get(requestHeaders, (res) => {
     }
   });
 
-  res.on("error", console.error);
-}).on("error", console.error);
+  res.on("error", Logger.error);
+}).on("error", Logger.error);
 
 function getMode(program) {
   let mode = Modes.GENERAL;

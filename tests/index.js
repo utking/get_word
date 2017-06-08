@@ -21,10 +21,12 @@ describe("Test the Oxford class", () => {
 describe("Test the Factory class", () => {
   const f = new Factory();
   for (const m in Modes) {
-    it("should create an Oxford descendant for ${m} mode", () => {
-      let o = f.create(m);
-      should.exist(o);
-    });
+    if (Modes.hasOwnProperty(m)) {
+      it("should create an Oxford descendant for ${m} mode", () => {
+        let o = f.create(m);
+        should.exist(o);
+      });
+    }
   }
 
   it("should create an instance of the Antonym class", () => {

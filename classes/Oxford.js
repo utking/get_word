@@ -1,3 +1,6 @@
+const Console = require('console').Console;
+const Logger = new Console(process.stdout, process.stderr);
+
 class Oxford {
   constructor(resp) {
     this._resp = resp;
