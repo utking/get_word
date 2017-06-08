@@ -22,7 +22,7 @@ describe("Test the Factory class", () => {
   const f = new Factory();
   for (const m in Modes) {
     if (Modes.hasOwnProperty(m)) {
-      it("should create an Oxford descendant for ${m} mode", () => {
+      it(`should create an Oxford descendant for ${m} mode`, () => {
         let o = f.create(m);
         should.exist(o);
       });
