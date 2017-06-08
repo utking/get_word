@@ -3,6 +3,7 @@ const Oxford = require("./Oxford");
 class Usage extends Oxford {
   constructor(resp) {
     super(resp);
+    this._appendix = "sentences";
   }
 
   _process() {

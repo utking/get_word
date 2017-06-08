@@ -6,6 +6,10 @@ class Oxford {
     this._resp = resp;
   }
 
+  getAppendix() {
+    return this._appendix;
+  }
+
   _process() { }
 
   getResults() {

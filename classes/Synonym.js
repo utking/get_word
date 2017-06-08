@@ -3,6 +3,7 @@ const Oxford = require("./Oxford");
 class Synonym extends Oxford {
   constructor(resp) {
     super(resp);
+    this._appendix = "synonyms";
   }
 
   _process() {

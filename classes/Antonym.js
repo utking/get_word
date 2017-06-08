@@ -3,6 +3,7 @@ const Oxford = require("./Oxford");
 class Antonym extends Oxford {
   constructor(resp) {
     super(resp);
+    this._appendix = "antonyms";
   }
 
   _process() {

@@ -3,6 +3,7 @@ const Oxford = require("./Oxford");
 class Meaning extends Oxford {
   constructor(resp) {
     super(resp);
+    this._appendix = "definitions";
   }
 
   _process() {

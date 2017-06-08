@@ -3,6 +3,7 @@ const Oxford = require("./Oxford");
 class Pronunciation extends Oxford {
   constructor(resp) {
     super(resp);
+    this._appendix = "pronunciations";
   }
 
   _process() {
