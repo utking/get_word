@@ -14,7 +14,7 @@ class Oxford {
 
   showResults() {
     this._process();
-    console.log(this._result);
+    Logger.log(this._result);
   }
 }
 

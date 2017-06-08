@@ -13,7 +13,7 @@ class Antonym extends Oxford {
       .filter((i) => i.senses)
       .map((i) => i.senses)
       .reduce((prev, cur) => {
-        cur.forEach(i => { prev.push(i.antonyms); });
+        cur.forEach((i) => { prev.push(i.antonyms); });
         return prev;
       }, [])
       .reduce((prev, cur) => {
