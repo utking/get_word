@@ -10,6 +10,27 @@ const Pronunciation = require("../classes/Pronunciation");
 
 const Factory = require("../classes/Factory");
 const Modes = require("../config/modes");
+const getMode = require("../utils/getMode");
+
+describe("Test the getMode util", () => {
+
+  it("should return Modes.ANTONYM for the options.antonyms", () => {
+    expect(getMode({ antonyms : 1 })).to.be.equal(Modes.ANTONYM);
+  });
+  it("should return Modes.SYNONYM for the options.synonyms", () => {
+    expect(getMode({ synonyms : 1 })).to.be.equal(Modes.SYNONYM);
+  });
+  it("should return Modes.USAGE for the options.examples", () => {
+    expect(getMode({ examples : 1 })).to.be.equal(Modes.USAGE);
+  });
+  it("should return Modes.PRONUNCIATION for the options.pronunciations", () => {
+    expect(getMode({ pronunciations : 1 })).to.be.equal(Modes.PRONUNCIATION);
+  });
+  it("should return Modes.GENERAL for empty options", () => {
+    expect(getMode()).to.be.equal(Modes.GENERAL);
+  });
+
+});
 
 describe("Test the Oxford class", () => {
   it("should not produce results", () => {
