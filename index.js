@@ -2,24 +2,11 @@ const https = require("https");
 const program = require("commander");
 const Modes = require("./config/modes");
 const options = require("./config/config");
+const getMode = require("./utils/getMode");
 const OxfordFactory = require("./classes/Factory.js");
 
 const Console = require("console").Console;
 const Logger = new Console(process.stdout, process.stderr);
-
-function getMode(program) {
-  let mode = Modes.GENERAL;
-  if (program.synonyms) {
-    mode = Modes.SYNONYM;
-  } else if (program.antonyms) {
-    mode = Modes.ANTONYM;
-  } else if (program.examples) {
-    mode = Modes.USAGE;
-  } else if (program.pronunciations) {
-    mode = Modes.PRONUNCIATION;
-  }
-  return mode;
-}
 
 program
   .version("1.1.0")
