@@ -39,9 +39,7 @@ const requestHeaders = {
 
 let req = https.get(requestHeaders, (res) => {
   let results = "";
-  res.on("data", (resp) => {
-    results += resp;
-  });
+  res.on("data", (resp) => results += resp);
 
   res.on("end", () => {
     let resp = {};
