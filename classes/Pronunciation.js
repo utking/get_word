@@ -1,7 +1,5 @@
 const Oxford = require("./Oxford");
 const player = require("play-sound")(opts = {});
-const Console = require("console").Console;
-const Logger = new Console(process.stdout, process.stderr);
 
 class Pronunciation extends Oxford {
   constructor(resp) {
@@ -35,10 +33,10 @@ class Pronunciation extends Oxford {
     if (file) {
       player.play(file, (err) => {
         if (err)
-          Logger.log(err);
+          this.log(err);
       });
     } else {
-      Logger.log("Sound file is not found");
+      this.log("Sound file is not found");
     }
   }
 

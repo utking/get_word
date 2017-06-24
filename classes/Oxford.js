@@ -1,9 +1,20 @@
-const Console = require("console").Console;
-const Logger = new Console(process.stdout, process.stderr);
-
 class Oxford {
   constructor(resp) {
     this._resp = resp;
+  }
+
+  set logger(logger) {
+    this._logger = logger;
+  }
+
+  get logger() {
+    return this._logger;
+  }
+
+  log(...items) {
+    if (this._logger && this._logger.log) {
+      this._logger.log(...items);
+    }
   }
 
   getAppendix() {
@@ -18,7 +29,7 @@ class Oxford {
 
   showResults() {
     this._process();
-    Logger.log(this._result);
+    this.log(this._result);
   }
 }
 

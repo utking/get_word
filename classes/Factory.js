@@ -6,20 +6,27 @@ const Usage         = require("./Usage");
 const Pronunciation = require("./Pronunciation");
 
 class OxfordFactory {
-  create(mode, items) {
+  create(mode, items, logger) {
+    let resObject;
     switch (mode) {
       case Modes.SYNONYM:
-        return new Synonym(items);
+        resObject = new Synonym(items);
+        break;
       case Modes.ANTONYM:
-        return new Antonym(items);
+        resObject = new Antonym(items);
+        break;
       case Modes.USAGE:
-        return new Usage(items);
+        resObject = new Usage(items);
+        break;
       case Modes.PRONUNCIATION:
-        return new Pronunciation(items);
+        resObject = new Pronunciation(items);
+        break;
       case Modes.GENERAL:
       default:
-        return new Meaning(items);
+        resObject = new Meaning(items);
     }
+    resObject.logger = logger;
+    return resObject;
   }
 }
 

@@ -54,7 +54,7 @@ let req = https.get(requestHeaders, (res) => {
 
     } else {
       factory
-        .create(mode, resp.results.pop().lexicalEntries)
+        .create(mode, resp.results.pop().lexicalEntries, Logger)
         .showResults();
     }
   });
