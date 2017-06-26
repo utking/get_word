@@ -10,5 +10,5 @@ module.exports = (base) => {
     log(...items) {
       Logger.log(...items);
     }
-  }
+  };
 };
