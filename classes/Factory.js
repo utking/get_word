@@ -1,4 +1,5 @@
 const Modes         = require("../config/modes.js");
+const LoggerMinix   = require("../utils/LoggerMixin.js");
 const Meaning       = require("./Meaning");
 const Synonym       = require("./Synonym");
 const Antonym       = require("./Antonym");
@@ -6,27 +7,27 @@ const Usage         = require("./Usage");
 const Pronunciation = require("./Pronunciation");
 
 class OxfordFactory {
-  create(mode, items, logger) {
+  create(mode, items) {
     let resObject;
     switch (mode) {
       case Modes.SYNONYM:
-        resObject = new Synonym(items);
+        resObject = Synonym;
         break;
       case Modes.ANTONYM:
-        resObject = new Antonym(items);
+        resObject = Antonym;
         break;
       case Modes.USAGE:
-        resObject = new Usage(items);
+        resObject = Usage;
         break;
       case Modes.PRONUNCIATION:
-        resObject = new Pronunciation(items);
+        resObject = Pronunciation;
         break;
       case Modes.GENERAL:
       default:
-        resObject = new Meaning(items);
+        resObject = Meaning;
     }
-    resObject.logger = logger;
-    return resObject;
+    class ClassWithLogger extends LoggerMinix(resObject) {}
+    return new ClassWithLogger(items);
   }
 }
 

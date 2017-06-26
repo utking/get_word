@@ -3,19 +3,7 @@ class Oxford {
     this._resp = resp;
   }
 
-  set logger(logger) {
-    this._logger = logger;
-  }
-
-  get logger() {
-    return this._logger;
-  }
-
-  log(...items) {
-    if (this._logger && this._logger.log) {
-      this._logger.log(...items);
-    }
-  }
+  log() { }
 
   getAppendix() {
     return this._appendix;

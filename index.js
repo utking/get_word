@@ -18,7 +18,7 @@ program
   .parse(process.argv);
 
 if (!program.args.length || program.args[0].length < 1) {
-  Logger.error(new Error("Empty request"));
+  Logger.error("Empty request");
   process.exit(0);
 }
 
@@ -54,7 +54,7 @@ let req = https.get(requestHeaders, (res) => {
 
     } else {
       factory
-        .create(mode, resp.results.pop().lexicalEntries, Logger)
+        .create(mode, resp.results.pop().lexicalEntries)
         .showResults();
     }
   });
