@@ -15,6 +15,14 @@ const FactoryMap = {
 };
 
 class OxfordFactory {
+  static createFactory() {
+    return new OxfordFactory();
+  }
+
+  getAppendix(mode) {
+    return OxfordFactory.createFactory().create(mode).getAppendix();
+  }
+
   create(mode, items) {
     let resObject = FactoryMap[mode] ? FactoryMap[mode] : Meaning;
     class ClassWithLogger extends loggerMinix(resObject) {}

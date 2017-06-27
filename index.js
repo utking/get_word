@@ -3,7 +3,7 @@ const program = require("commander");
 const Modes = require("./config/modes");
 const options = require("./config/config");
 const getMode = require("./utils/getMode");
-const OxfordFactory = require("./classes/Factory.js");
+const factory = require("./classes/Factory.js").createFactory();
 
 const Console = require("console").Console;
 const Logger = new Console(process.stdout, process.stderr);
@@ -23,9 +23,8 @@ if (!program.args.length || program.args[0].length < 1) {
 }
 
 const mode = getMode(program);
-const factory = new OxfordFactory();
 const word = encodeURIComponent(program.args.join(" "));
-const appendix = factory.create(mode).getAppendix();
+const appendix = factory.getAppendix(mode);
 
 const requestHeaders = {
   hostname: options.api_hosthane,
