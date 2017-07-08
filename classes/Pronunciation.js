@@ -20,7 +20,7 @@ class Pronunciation extends Oxford {
           note: item.phoneticNotation,
         };
       })
-      .forEach((i) => { this._result += `  ${i.cat}: ${i.spell} (${i.note})\n`; });
+      .forEach((i) => { this._result += `  ${i.cat}: ${i.spell || ""} (${i.note || ""})\n`; });
     this.play();
   }
 
