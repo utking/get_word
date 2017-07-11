@@ -1,5 +1,5 @@
 const Modes         = require("../config/modes.js");
-const loggerMinix   = require("../utils/LoggerMixin.js");
+const loggerMixin   = require("../utils/LoggerMixin.js");
 const Meaning       = require("./Meaning");
 const Synonym       = require("./Synonym");
 const Antonym       = require("./Antonym");
@@ -25,7 +25,7 @@ class OxfordFactory {
 
   create(mode, items) {
     let resObject = FactoryMap[mode] ? FactoryMap[mode] : Meaning;
-    class ClassWithLogger extends loggerMinix(resObject) {}
+    class ClassWithLogger extends loggerMixin(resObject) {}
     return new ClassWithLogger(items);
   }
 }
