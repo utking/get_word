@@ -1,6 +1,5 @@
 const https = require("https");
 const program = require("commander");
-const Modes = require("./config/modes");
 const options = require("./config/config");
 const getMode = require("./utils/getMode");
 const factory = require("./classes/Factory.js").createFactory();
@@ -36,7 +35,7 @@ const requestHeaders = {
   }
 };
 
-let req = https.get(requestHeaders, (res) => {
+https.get(requestHeaders, (res) => {
   let results = "";
   res.on("data", (resp) => results += resp);
 

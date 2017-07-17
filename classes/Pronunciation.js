@@ -8,7 +8,6 @@ class Pronunciation extends Oxford {
   }
 
   _process() {
-    let index = 0;
     this._result = "Pronunciations examples:\n";
     (this._resp || [])
       .map((i) => {
