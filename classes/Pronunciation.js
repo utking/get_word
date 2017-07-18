@@ -1,5 +1,5 @@
 const Oxford = require("./Oxford");
-const player = require("play-sound")(opts = {});
+const player = require("play-sound")();
 
 class Pronunciation extends Oxford {
   constructor(resp) {
@@ -31,8 +31,9 @@ class Pronunciation extends Oxford {
     let file = this._getFile();
     if (file) {
       player.play(file, (err) => {
-        if (err)
+        if (err) {
           this.log(err);
+        }
       });
     } else {
       this.log("Sound file is not found");
