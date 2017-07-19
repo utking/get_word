@@ -1,18 +1,20 @@
 const Modes = require("../config/modes");
 
+const modesMap = {
+  synonyms: Modes.SYNONYM,
+  antonyms: Modes.ANTONYM,
+  examples: Modes.USAGE,
+  pronunciations: Modes.PRONUNCIATION
+};
+
 module.exports = function (program) {
   let mode = Modes.GENERAL;
-  if (!program) {
-    return mode;
-  }
-  if (program.synonyms) {
-    mode = Modes.SYNONYM;
-  } else if (program.antonyms) {
-    mode = Modes.ANTONYM;
-  } else if (program.examples) {
-    mode = Modes.USAGE;
-  } else if (program.pronunciations) {
-    mode = Modes.PRONUNCIATION;
+  if (program) {
+    for (let k in modesMap) {
+      if (program[k] && modesMap[k]) {
+        return modesMap[k];
+      }
+    }
   }
   return mode;
 };
