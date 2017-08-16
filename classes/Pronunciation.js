@@ -11,8 +11,10 @@ class Pronunciation extends Oxford {
     this._result = "Pronunciations examples:\n";
     (this._resp || [])
       .map((i) => {
-        let item = i.pronunciations.pop();
-        this.soundFile = item.audioFile;
+        let item = i.pronunciations ? i.pronunciations.pop() : { audioFile: null };
+        if (!this.soundFile) {
+          this.soundFile = item.audioFile;
+        }
         return {
           cat: i.lexicalCategory,
           spell: item.phoneticSpelling,
